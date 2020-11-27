@@ -6,6 +6,8 @@ from users.serializers import *
 app_name = 'users'
 router = DefaultRouter()
 router.register("teacher",views.TeacherViewset, "teacher_view"),
+router.register("admin",views.AdminViewset, "admin_view"),
+
 
 urlpatterns = [
     path('register',views.RegisterView.as_view()),

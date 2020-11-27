@@ -85,6 +85,16 @@ class TeacherViewset(viewsets.ModelViewSet):
         return Response(serializer.data)
     '''
     def get_permissions(self):    
-        if self.request.method == 'POST' or self.request.method == 'DELETE':
+        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
             self.permission_classes = [Is_Teacher]
         return super(TeacherViewset, self).get_permissions()
+
+class AdminViewset(viewsets.ModelViewSet):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+  
+    def get_permissions(self):    
+        if self.request.method == 'POST' or self.request.method == 'GET' or self.request.method == 'DELETE':
+            self.permission_classes = [Is_Superadmin]
+        return super(AdminViewset, self).get_permissions()
