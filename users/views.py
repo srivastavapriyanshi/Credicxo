@@ -98,3 +98,20 @@ class AdminViewset(viewsets.ModelViewSet):
         if self.request.method == 'POST' or self.request.method == 'GET' or self.request.method == 'DELETE':
             self.permission_classes = [Is_Superadmin]
         return super(AdminViewset, self).get_permissions()
+
+class StudentAPIView(views.APIView):
+
+    def get_queryset(self):
+        students = Student.objects.all()
+        print(students)
+        return students
+
+    def get(self,request,id,*args,**kwargs):
+        if request.user and request.user.groups.filter(name='student'):
+            student = self.get_queryset().filter(user=request.user,id=id)
+            serializer = StudentSerializers(student,many=True)
+            return Response(serializer.data)
+        return Response({'detail':'No Student data'})
+
+
+

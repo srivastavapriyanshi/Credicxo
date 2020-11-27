@@ -44,4 +44,5 @@ class StudentSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        fields = ('name','roll_no','age','email','std','contact','user',)
+        fields = ('id','name','roll_no','age','email','std','contact','user',)
+        read_only_fields = ('id',)

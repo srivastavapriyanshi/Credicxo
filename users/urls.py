@@ -10,8 +10,9 @@ router.register("admin",views.AdminViewset, "admin_view"),
 
 
 urlpatterns = [
-    path('register',views.RegisterView.as_view()),
-    path('login', views.LoginView.as_view()),
+    path('register/',views.RegisterView.as_view()),
+    path('login/', views.LoginView.as_view()),
+    path('student/<int:id>/',views.StudentAPIView.as_view()),
     path("", include(router.urls)),
 
 ]
